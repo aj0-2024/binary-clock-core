@@ -1,12 +1,13 @@
 export enum Bulb {
-    On,
-    Off,
+    Off = 'Off',
+    On = 'On',
 }
 
 export interface TimeUnit {
     a1: Bulb;
     a2: Bulb;
     a3: Bulb;
+    a4: Bulb;
     b1: Bulb;
     b2: Bulb;
     b3: Bulb;
@@ -21,29 +22,47 @@ export class BinaryClockCore {
     }
 
     public getHours(): TimeUnit {
-        const decimalHours = this.inputDate.getHours();
-        const binHours = this.decimalToBinary(decimalHours);
-        return this.binaryToTimeUnit(binHours);
+        return this.decimalToTimeUnit(this.inputDate.getHours());
     }
 
     public getMinutes(): TimeUnit {
-        const decimalMinutes = this.inputDate.getMinutes();
-        const binMinutes = this.decimalToBinary(decimalMinutes);
-        return this.binaryToTimeUnit(binMinutes);
+        return this.decimalToTimeUnit(this.inputDate.getMinutes());
     }
 
     public getSeconds(): TimeUnit {
-        const decimalSeconds = this.inputDate.getSeconds();
-        const binSeconds = this.decimalToBinary(decimalSeconds);
-        return this.binaryToTimeUnit(binSeconds);
+        return this.decimalToTimeUnit(this.inputDate.getSeconds());
+    }
+
+    private decimalToDigits(decimalNumber: number): number[] {
+        return this.padDigits(this.convertToBase(decimalNumber, 10), 2);
     }
 
     private decimalToBinary(decimalNumber: number): number[] {
-        const remainders = [];
-        const base = 2;
-        const currNumber = decimalNumber;
+        const binNumberDigits = this.convertToBase(decimalNumber, 2);
+        return this.padDigits(binNumberDigits, 4);
+    }
 
-        while (decimalNumber > 0) {
+    private padDigits(digits: number[], padLength: number) {
+        const padValue = 0;
+
+        if (digits.length < padLength) {
+            const toPadLength = padLength - digits.length;
+
+            for (let i = 0; i < toPadLength; i++) {
+                // insert padValue in the MSB
+                digits.splice(0, 0, padValue);
+            }
+        }
+
+        return digits;
+    }
+
+    // converts a number into the given base, returns an array of digits
+    private convertToBase(inputNumber: number, base: number): number[] {
+        const remainders = [];
+        let currNumber = inputNumber;
+
+        while (currNumber > 0) {
             remainders.push(currNumber % base);
             currNumber = Math.floor(currNumber / base);
         }
@@ -51,15 +70,33 @@ export class BinaryClockCore {
         return remainders.reverse();
     }
 
-    private binaryToTimeUnit(binNumber: number[]): TimeUnit {
+    // converts a binary digit number into Bulb
+    private binToBulb(binNumber: number): Bulb {
+        if (binNumber === 0) {
+            return Bulb.Off;
+        } else {
+            return Bulb.On;
+        }
+    }
+
+    private decimalToTimeUnit(decimalNumber: number): TimeUnit {
+        const digits = this.decimalToDigits(decimalNumber);
+
+        // a represents the most significant digit
+        const a = this.decimalToBinary(digits[0]);
+
+        // b represents the least significant digit
+        const b = this.decimalToBinary(digits[1]);
+
         return {
-            a1: Bulb.Off,
-            a2: Bulb.Off,
-            a3: Bulb.Off,
-            b1: Bulb.Off,
-            b2: Bulb.Off,
-            b3: Bulb.Off,
-            b4: Bulb.Off,
+            a4: this.binToBulb(a[0]),
+            a3: this.binToBulb(a[1]),
+            a2: this.binToBulb(a[2]),
+            a1: this.binToBulb(a[3]),
+            b4: this.binToBulb(b[0]),
+            b3: this.binToBulb(b[1]),
+            b2: this.binToBulb(b[2]),
+            b1: this.binToBulb(b[3]),
         };
     }
 }

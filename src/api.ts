@@ -1,5 +1,5 @@
-import { BinaryClockCore } from "./core";
+import { BinaryClockCore } from './core';
 
-export const createBinaryClock(dateTime: Date): BinaryClockCore {
+export const createBinaryClock = (dateTime: Date): BinaryClockCore => {
     return new BinaryClockCore(dateTime);
-}
+};
