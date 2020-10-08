@@ -41,4 +41,20 @@ describe('Core API tests', () => {
             b1: Bulb.On,
         });
     });
+
+    it('Test the getSeconds functionality', () => {
+        const date = new Date('October 6, 2020 23:57:29');
+        const clock = createBinaryClock(date);
+
+        expect(clock.getSeconds()).toStrictEqual({
+            a4: Bulb.Off,
+            a3: Bulb.Off,
+            a2: Bulb.On,
+            a1: Bulb.Off,
+            b4: Bulb.On,
+            b3: Bulb.Off,
+            b2: Bulb.Off,
+            b1: Bulb.On,
+        });
+    });
 });
