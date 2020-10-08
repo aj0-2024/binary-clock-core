@@ -1,18 +1,5 @@
-export enum Bulb {
-    Off = 'Off',
-    On = 'On',
-}
-
-export interface TimeUnit {
-    a1: Bulb;
-    a2: Bulb;
-    a3: Bulb;
-    a4: Bulb;
-    b1: Bulb;
-    b2: Bulb;
-    b3: Bulb;
-    b4: Bulb;
-}
+import { Bulb } from './bulb';
+import { TimeUnit } from './time';
 
 export class BinaryClockCore {
     private inputDate: Date;
