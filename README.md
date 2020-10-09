@@ -1,10 +1,13 @@
 # Binary Clock Core
-
 The core logic of a binary clock
 
-## Installation
+## Features
+- `~400 Bytes` & 0 dependencies
 
-Not published on npm yet
+## Installation
+```
+npm install --save binary-clock-core
+```
 
 ## Usage
 
