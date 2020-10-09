@@ -1,5 +1,5 @@
 # Binary Clock Core
-The core logic of a binary clock
+Implementation of the core logic for a binary clock.
 
 ## Features
 - `~400 Bytes` & 0 dependencies
