@@ -1,4 +1,4 @@
-import { Bulb } from './bulb';
+import { binToBulb } from './bulb';
 import { TimeUnit } from './time';
 
 export class BinaryClockCore {
@@ -57,15 +57,6 @@ export class BinaryClockCore {
         return remainders.reverse();
     }
 
-    // converts a binary digit number into Bulb
-    private binToBulb(binNumber: number): Bulb {
-        if (binNumber === 0) {
-            return Bulb.Off;
-        } else {
-            return Bulb.On;
-        }
-    }
-
     private decimalToTimeUnit(decimalNumber: number): TimeUnit {
         const digits = this.decimalToDigits(decimalNumber);
 
@@ -76,14 +67,14 @@ export class BinaryClockCore {
         const b = this.decimalToBinary(digits[1]);
 
         return {
-            a4: this.binToBulb(a[0]),
-            a3: this.binToBulb(a[1]),
-            a2: this.binToBulb(a[2]),
-            a1: this.binToBulb(a[3]),
-            b4: this.binToBulb(b[0]),
-            b3: this.binToBulb(b[1]),
-            b2: this.binToBulb(b[2]),
-            b1: this.binToBulb(b[3]),
+            a4: binToBulb(a[0]),
+            a3: binToBulb(a[1]),
+            a2: binToBulb(a[2]),
+            a1: binToBulb(a[3]),
+            b4: binToBulb(b[0]),
+            b3: binToBulb(b[1]),
+            b2: binToBulb(b[2]),
+            b1: binToBulb(b[3]),
         };
     }
 }
