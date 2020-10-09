@@ -51,5 +51,12 @@
     "tsdx": "^0.14.0",
     "tslib": "^2.0.1",
     "typescript": "^4.0.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anirudh-janga/binary-clock-core"
+  },
+  "keywords": [
+    "Binary Clock"
+  ]
 }
