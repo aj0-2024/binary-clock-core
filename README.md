@@ -26,7 +26,7 @@ clock.getSeconds();
 
 ### 3. Sample output
 
-Use the clock coordinates below to display it
+Use the clock coordinates below to display a time unit.
 
 ```
 {
