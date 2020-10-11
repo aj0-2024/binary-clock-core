@@ -35,7 +35,6 @@ Use the clock coordinates below to display a time unit.
 
 ```
 {
-  a4: 'Off',
   a3: 'Off',
   a2: 'On',
   a1: 'Off',
