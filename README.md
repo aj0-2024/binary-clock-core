@@ -2,7 +2,7 @@
 Implementation of the core logic for a binary clock.
 
 ## Features
-- `~400 Bytes` & 0 dependencies
+- `~320 Bytes` & 0 dependencies
 
 ## Installation
 ```
@@ -10,21 +10,23 @@ npm install --save binary-clock-core
 ```
 
 ## Usage
-
-### 1. Creating the clock object
-
-```
-import { createBinaryClock } from "binary-clock-core";
-
-const clock = createBinaryClock(new Date());
-```
+The library has four core APIs
+- `getTime`
+- `getHours`
+- `getMinutes`
+- `getSeconds`
 
 ### 2. Using the core API
 
 ```
-clock.getHours();
-clock.getMinutes();
-clock.getSeconds();
+import * as clock from 'binary-clock-core';
+
+const currDate = new Date();
+
+clock.getTime(currDate);
+clock.getHours(currDate);
+clock.getMinutes(currDate);
+clock.getSeconds(currDate);
 ```
 
 ### 3. Sample output
