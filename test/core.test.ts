@@ -1,21 +1,10 @@
-import { createBinaryClock } from '../src';
-import { BinaryClockCore } from '../src/core';
+import * as clock from '../src/core';
 import { Bulb } from '../src/bulb';
-
-describe('Basic Binary Clock Tests', () => {
-    it('Creates clock successfully', () => {
-        const clock = createBinaryClock(new Date());
-        expect(clock).toBeInstanceOf(BinaryClockCore);
-    });
-});
 
 describe('Core API tests', () => {
     it('Test the getHours functionality', () => {
         const date = new Date('October 6, 2020 23:10:10');
-        const clock = createBinaryClock(date);
-
-        expect(clock.getHours()).toStrictEqual({
-            a4: Bulb.Off,
+        expect(clock.getHours(date)).toStrictEqual({
             a3: Bulb.Off,
             a2: Bulb.On,
             a1: Bulb.Off,
@@ -28,10 +17,7 @@ describe('Core API tests', () => {
 
     it('Test the getMinutes functionality', () => {
         const date = new Date('October 6, 2020 23:57:10');
-        const clock = createBinaryClock(date);
-
-        expect(clock.getMinutes()).toStrictEqual({
-            a4: Bulb.Off,
+        expect(clock.getMinutes(date)).toStrictEqual({
             a3: Bulb.On,
             a2: Bulb.Off,
             a1: Bulb.On,
@@ -44,10 +30,7 @@ describe('Core API tests', () => {
 
     it('Test the getSeconds functionality', () => {
         const date = new Date('October 6, 2020 23:57:29');
-        const clock = createBinaryClock(date);
-
-        expect(clock.getSeconds()).toStrictEqual({
-            a4: Bulb.Off,
+        expect(clock.getSeconds(date)).toStrictEqual({
             a3: Bulb.Off,
             a2: Bulb.On,
             a1: Bulb.Off,
